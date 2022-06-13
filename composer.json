@@ -1,6 +1,7 @@
 {
     "name": "pcore/database",
     "type": "library",
+    "license": "MIT",
     "homepage": "https://github.com/pcore-framework/database",
     "authors": [
         {
