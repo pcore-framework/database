@@ -10,7 +10,9 @@
         }
     ],
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "ext-pdo": "*",
+        "pcore/utils": "dev-dev"
     },
     "autoload": {
         "psr-4": {
