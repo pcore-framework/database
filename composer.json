@@ -13,7 +13,6 @@
         "php": "^8.0",
         "ext-pdo": "*",
         "pcore/utils": "dev-dev",
-        "pcore/pool": "dev-dev",
         "ext-json": "*",
         "pcore/config": "dev-dev"
     },
