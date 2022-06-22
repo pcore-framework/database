@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PCore\Database\Eloquent\Traits;
+namespace PCore\Database\Models\Traits;
 
-use PCore\Database\Eloquent\Model;
-use PCore\Database\Eloquent\Relations\HasMany;
+use PCore\Database\Models\Model;
+use PCore\Database\Models\Relations\HasMany;
 
 /**
  * Trait Relations
- * @package PCore\Database\Eloquent\Traits
+ * @package PCore\Database\Models\Traits
  * @github https://github.com/pcore-framework/database
  */
 trait Relations

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PCore\Database\Eloquent;
+namespace PCore\Database\Models;
 
 use PCore\Database\Collection;
 use PCore\Database\Exceptions\ModelNotFoundException;
@@ -12,7 +12,7 @@ use Throwable;
 
 /**
  * Class Builder
- * @package PCore\Database\Eloquent
+ * @package PCore\Database\Models
  * @github https://github.com/pcore-framework/database
  */
 class Builder extends QueryBuilder

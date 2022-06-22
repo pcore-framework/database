@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PCore\Database\Eloquent\Relations;
+namespace PCore\Database\Models\Relations;
 
 /**
  * Class HasOne
- * @package PCore\Database\Eloquent\Relations
+ * @package PCore\Database\Models\Relations
  * @github https://github.com/pcore-framework/database
  */
 class HasOne implements \JsonSerializable

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PCore\Database\Eloquent\Traits;
+namespace PCore\Database\Models\Traits;
 
 /***
  * Trait SoftDelete
- * @package PCore\Database\Eloquent\Traits
+ * @package PCore\Database\Models\Traits
  * @github https://github.com/pcore-framework/database
  */
 trait SoftDelete

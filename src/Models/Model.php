@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PCore\Database\Eloquent;
+namespace PCore\Database\Models;
 
 use ArrayAccess;
 use JsonSerializable;
 use PCore\Database\Collection;
-use PCore\Database\Eloquent\Traits\Relations;
+use PCore\Database\Models\Traits\Relations;
 use PCore\Database\Exceptions\ModelNotFoundException;
 use PCore\Database\Manager;
 use PCore\Utils\Arr;
@@ -17,7 +17,7 @@ use Throwable;
 
 /**
  * Class Model
- * @package PCore\Database\Eloquent
+ * @package PCore\Database\Models
  * @github https://github.com/pcore-framework/database
  *
  * @method static Builder where(string $column, $value, string $operator = '=')
