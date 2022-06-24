@@ -14,7 +14,8 @@
         "ext-pdo": "*",
         "pcore/utils": "dev-dev",
         "ext-json": "*",
-        "pcore/config": "dev-dev"
+        "pcore/config": "dev-dev",
+        "pcore/context": "dev-dev"
     },
     "autoload": {
         "psr-4": {
