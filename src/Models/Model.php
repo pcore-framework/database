@@ -10,6 +10,7 @@ use PCore\Database\Collection;
 use PCore\Database\Models\Traits\Relations;
 use PCore\Database\Exceptions\ModelNotFoundException;
 use PCore\Database\Manager;
+use PCore\Database\Query\Expression;
 use PCore\Utils\Arr;
 use PCore\Utils\Contracts\Arrayable;
 use PCore\Utils\Str;
@@ -22,7 +23,7 @@ use Throwable;
  *
  * @method static Builder where(string $column, $value, string $operator = '=')
  * @method static Builder whereNull(string $column)
- * @method static Builder order(string $column, string $sort = 'ASC')
+ * @method static Builder order(string|Expression $column, string $sort = 'ASC')
  * @method static Builder limit(int $limit)
  */
 abstract class Model implements ArrayAccess, Arrayable, JsonSerializable
