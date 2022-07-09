@@ -12,10 +12,10 @@
     "require": {
         "php": "^8.0",
         "ext-pdo": "*",
-        "pcore/utils": "v1.0.0",
+        "pcore/utils": "dev-main",
         "ext-json": "*",
-        "pcore/config": "v1.0.0",
-        "pcore/context": "v1.0.0"
+        "pcore/config": "dev-main",
+        "pcore/context": "dev-main"
     },
     "autoload": {
         "psr-4": {
