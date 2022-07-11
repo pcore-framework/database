@@ -106,7 +106,6 @@ class Builder
     public function from(string $table, $alias = null): static
     {
         $this->from = func_get_args();
-
         return $this;
     }
 
@@ -120,7 +119,6 @@ class Builder
     {
         $this->where[] = [$column, $operator, '?'];
         $this->addBindings($value);
-
         return $this;
     }
 
@@ -131,7 +129,6 @@ class Builder
     public function whereNull(string $column): static
     {
         $this->where[] = [$column, 'IS NULL'];
-
         return $this;
     }
 
@@ -142,7 +139,6 @@ class Builder
     public function whereNotNull(string $column): static
     {
         $this->where[] = [$column, 'IS NULL'];
-
         return $this;
     }
 
@@ -167,7 +163,6 @@ class Builder
             $this->addBindings($in);
             $this->where[] = [$column, 'IN', sprintf('(%s)', rtrim(str_repeat('?, ', count($in)), ' ,'))];
         }
-
         return $this;
     }
 
@@ -180,7 +175,6 @@ class Builder
     {
         $this->where[] = new Expression($expression);
         $this->setBindings($bindings);
-
         return $this;
     }
 
@@ -226,7 +220,6 @@ class Builder
     {
         $this->addBindings([$start, $end]);
         $this->where[] = [$column, 'BETWEEN', '(? AND ?)'];
-
         return $this;
     }
 
@@ -271,7 +264,6 @@ class Builder
     public function select(array $columns = ['*']): static
     {
         $this->select = $columns;
-
         return $this;
     }
 
@@ -283,7 +275,6 @@ class Builder
     public function order($column, string $order = 'ASC'): static
     {
         $this->order[] = [$column, $order];
-
         return $this;
     }
 
@@ -312,7 +303,6 @@ class Builder
     public function group($column): static
     {
         $this->group[] = $column;
-
         return $this;
     }
 
@@ -325,7 +315,6 @@ class Builder
     public function having($first, $last, string $operator = '='): static
     {
         $this->having[] = [$first, $operator, $last];
-
         return $this;
     }
 
@@ -336,7 +325,6 @@ class Builder
     public function limit(int $limit): static
     {
         $this->limit = $limit;
-
         return $this;
     }
 
@@ -347,7 +335,6 @@ class Builder
     public function offset(int $offset): static
     {
         $this->offset = $offset;
-
         return $this;
     }
 
@@ -366,7 +353,6 @@ class Builder
                 $this->select(array_merge($this->select, $columns));
             }
         }
-
         return $this->generateSelectQuery();
     }
 
@@ -385,7 +371,7 @@ class Builder
      */
     public function count(string|int $column = '*'): int
     {
-        return $this->aggregate("COUNT($column)");
+        return $this->aggregate("COUNT({$column})");
     }
 
     /**
@@ -394,7 +380,7 @@ class Builder
      */
     public function sum($column): int
     {
-        return $this->aggregate("SUM($column)");
+        return $this->aggregate("SUM({$column})");
     }
 
     /**
@@ -403,7 +389,7 @@ class Builder
      */
     public function max($column): int
     {
-        return $this->aggregate("MAX($column)");
+        return $this->aggregate("MAX({$column})");
     }
 
     /**
@@ -412,7 +398,7 @@ class Builder
      */
     public function min($column): int
     {
-        return $this->aggregate("MIN($column)");
+        return $this->aggregate("MIN({$column})");
     }
 
     /**
@@ -421,7 +407,7 @@ class Builder
      */
     public function avg($column): int
     {
-        return $this->aggregate("AVG($column)");
+        return $this->aggregate("AVG({$column})");
     }
 
     /**
@@ -441,9 +427,10 @@ class Builder
      */
     public function exists(): bool
     {
-        return (bool)$this->query
-            ->statement(sprintf('SELECT EXISTS(%s) AS MAX_EXIST', $this->toSql()), $this->bindings)
-            ->fetchColumn();
+        return (bool)$this->query->statement(
+            sprintf('SELECT EXISTS(%s) AS MAX_EXIST', $this->toSql()),
+            $this->bindings
+        )->fetchColumn();
     }
 
     /**
@@ -454,8 +441,9 @@ class Builder
     public function column(string $column, ?string $key = null): Collection
     {
         return Collection::make(
-            $this->query->statement($this->toSql(array_filter([$column, $key])), $this->bindings,)
-                ->fetchAll() ?: []
+            $this->query->statement($this->toSql(array_filter([$column, $key])), $this->bindings)
+                ->fetchAll()
+                ?: []
         )->pluck($column, $key);
     }
 
@@ -476,7 +464,9 @@ class Builder
      */
     public function first(array $columns = ['*']): mixed
     {
-        return $this->query->statement($this->limit(1)->toSql($columns), $this->bindings)->fetch(PDO::FETCH_ASSOC);
+        return $this->query->statement($this->limit(1)
+            ->toSql($columns), $this->bindings)
+            ->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -484,7 +474,7 @@ class Builder
      */
     public function delete(): int
     {
-        return $this->query->statement($this->generateDeleteQuery(), $this->bindings,)->rowCount();
+        return $this->query->statement($this->generateDeleteQuery(), $this->bindings)->rowCount();
     }
 
     /**
@@ -633,6 +623,7 @@ class Builder
         }
         return $query;
     }
+
 
     /**
      * @return string

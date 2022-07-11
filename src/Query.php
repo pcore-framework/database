@@ -27,7 +27,7 @@ class Query implements QueryInterface
 
     /**
      * @param ConnectorInterface $connector
-     * @param EventDispatcherInterface|null $eventDispatcher
+     * @param null|EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         protected ConnectorInterface $connector,

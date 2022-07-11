@@ -7,9 +7,9 @@ namespace PCore\Database\Models;
 use ArrayAccess;
 use JsonSerializable;
 use PCore\Database\Collection;
-use PCore\Database\Models\Traits\Relations;
 use PCore\Database\Exceptions\ModelNotFoundException;
 use PCore\Database\Manager;
+use PCore\Database\Models\Traits\Relations;
 use PCore\Database\Query\Expression;
 use PCore\Utils\Arr;
 use PCore\Utils\Contracts\Arrayable;
@@ -23,7 +23,7 @@ use Throwable;
  *
  * @method static Builder where(string $column, $value, string $operator = '=')
  * @method static Builder whereNull(string $column)
- * @method static Builder order(string|Expression $column, string $sort = 'ASC')
+ * @method static Builder order(Expression|string $column, string $sort = 'ASC')
  * @method static Builder limit(int $limit)
  */
 abstract class Model implements ArrayAccess, Arrayable, JsonSerializable
@@ -96,6 +96,7 @@ abstract class Model implements ArrayAccess, Arrayable, JsonSerializable
         }
         $this->table ??= Str::camel(class_basename(static::class));
     }
+
 
     /**
      * @return array
@@ -284,16 +285,17 @@ abstract class Model implements ArrayAccess, Arrayable, JsonSerializable
     protected function cast($value, $cast, bool $isWrite = false): mixed
     {
         return match ($cast) {
-            'boolean',
-            'bool' => (bool)$value,
-            'integer',
-            'int' => (int)$value,
+            'boolean', 'bool' => (bool)$value,
+            'integer', 'int' => (int)$value,
             'string' => (string)$value,
-            'double',
-            'float' => (float)$value,
-            'json' => $isWrite ? json_encode($value, JSON_UNESCAPED_UNICODE) : json_decode($value, true),
-            'serialize' => $isWrite ? serialize($value) : unserialize($value),
-            default => $value
+            'double', 'float' => (float)$value,
+            'json' => $isWrite
+                ? json_encode($value, JSON_UNESCAPED_UNICODE)
+                : json_decode($value, true),
+            'serialize' => $isWrite
+                ? serialize($value)
+                : unserialize($value),
+            default => $value,
         };
     }
 

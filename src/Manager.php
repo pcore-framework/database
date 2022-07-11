@@ -18,7 +18,7 @@ class Manager
 {
 
     /**
-     * @var string|mixed
+     * @var mixed|string
      */
     protected string $defaultConnection;
 

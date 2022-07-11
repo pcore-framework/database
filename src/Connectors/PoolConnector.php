@@ -76,7 +76,7 @@ class PoolConnector implements ConnectorInterface, PoolInterface
             $this->config->getPassword(),
             $this->config->getOptions()
         );
-        $this->size++;
+        ++$this->size;
         return $PDO;
     }
 
@@ -88,8 +88,8 @@ class PoolConnector implements ConnectorInterface, PoolInterface
     public function put($PDO)
     {
         if (is_null($PDO)) {
-            $this->size--;
-        } else if (!$this->pool->isFull()) {
+            --$this->size;
+        } elseif (!$this->pool->isFull()) {
             $this->pool->push($PDO);
         }
     }
@@ -99,7 +99,7 @@ class PoolConnector implements ConnectorInterface, PoolInterface
      */
     public function fill()
     {
-        for ($i = 0; $i < $this->capacity; $i++) {
+        for ($i = 0; $i < $this->capacity; ++$i) {
             $this->put($this->create());
         }
         $this->size = $this->capacity;

@@ -60,7 +60,6 @@ class Join
     public function on($first, $last, string $operator = '=')
     {
         $this->on = [$first, $operator, $last];
-
         return $this->builder;
     }
 

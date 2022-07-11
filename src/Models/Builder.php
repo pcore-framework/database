@@ -72,8 +72,10 @@ class Builder extends QueryBuilder
     public function firstOrFail(array $columns = ['*']): Model
     {
         return $this->query->statement(
-            $this->limit(1)->toSql($columns), $this->bindings
-        )->fetchObject($this->class) ?: throw new ModelNotFoundException('Данные не найдены.');
+            $this->limit(1)->toSql($columns),
+            $this->bindings
+        )->fetchObject($this->class)
+            ?: throw new ModelNotFoundException('Данные не найдены.');
     }
 
     /**

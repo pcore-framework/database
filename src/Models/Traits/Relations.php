@@ -23,7 +23,7 @@ trait Relations
     protected function hasMany($related, $foreignKey = null, $localKey = null)
     {
         /** @var Model $entity */
-        $entity = new $related;
+        $entity = new $related();
         $foreignKey ??= $entity->getTable() . '_id';
         return new HasMany($entity->newQuery(), $this, $this->getTable() . '.' . $foreignKey, $localKey);
     }
